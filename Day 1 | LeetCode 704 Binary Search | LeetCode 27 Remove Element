@@ -1,5 +1,0 @@
-#【Easy】LeetCode 704 Binary Search 
-Link: https://leetcode.com/problems/binary-search/
-在捡起又放下的刷题路上，二分查找已经是老朋友了。
-主要思路：二分查找最开始需要设置两个变量L，R （ L为左侧边界，R为右侧边界）接着是一个while循环，循环终止条件通常为判断 ‘while(left < right)’ 
-难点：左闭右开与左开右闭
