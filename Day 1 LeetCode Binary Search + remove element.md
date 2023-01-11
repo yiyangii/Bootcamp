@@ -1,3 +1,10 @@
+## 今日学习时常2小时，第一次尝试记录自己的刷题花了不少时间
+今日素材：
+https://programmercarl.com/%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html
+https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html
+https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html
+https://www.bilibili.com/video/BV1fA4y1o715/?spm_id_from=333.788
+
 # 【Easy】LeetCode 704 Binary Search
 **Link**: https://leetcode.com/problems/binary-search/
 
@@ -43,6 +50,30 @@ class Solution {
             }
         }
         return -1;
+    }
+}
+```
+# 【Easy】LeetCode 27 Remove Element
+**Link**: https://leetcode.com/problems/remove-element/description/
+
+理解了大概思路以后几分钟就做出来了，主要是明白题意不能直接创建新数组然后赋值。
+
+**难点**：理解快慢指针的任务，慢指针的每次增加都意味着快指针找到目标元素并与当前快指针所处的位置元素进行替换，快指针负责遍历数组找到目标元素。
+
+**主要思路**: 经典双指针问题，通过快慢指针实现对数组的修改。慢指针用于修改数组，快指针寻找非目标元素。
+**题解**：
+```
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int fast = 0;
+        int slow = 0;
+        for(fast = 0;fast < nums.length;fast++){
+            if(nums[fast] != val){
+                nums[slow] = nums[fast];
+                slow = slow + 1;
+            }
+        }
+        return slow;
     }
 }
 ```
