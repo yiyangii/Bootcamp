@@ -1,6 +1,6 @@
 # Day 2 LeetCode 977. Squares of a Sorted Array | 209. Minimum Size Subarray Sum | 59. Spiral Matrix II
 ## [Easy] 977. Squares of a Sorted Array
-Link: https://leetcode.com/problems/squares-of-a-sorted-array/
+**Link** : https://leetcode.com/problems/squares-of-a-sorted-array/
 
 第一次刷到这题偷懒用了Arrays.sort暴力排序一劳永逸，二刷的时候因为想着用快慢指针导致思路错了花了不少时间，其实这题十分简单。
 
@@ -34,7 +34,7 @@ class Solution {
 ```
 
 ## [Medium]209. Minimum Size Subarray Sum
-**Link** :https://leetcode.com/problems/minimum-size-subarray-sum/description/
+**Link** : https://leetcode.com/problems/minimum-size-subarray-sum/description/
 
 第一次看到就想到了滑动窗口，但实际上写了一个暴力解法，一直调整还是超过了time limit最后还是看了题解才恍然大悟。这道题最为精妙的地方还是解法对于窗口的起始点与终止点的处理
 
@@ -70,6 +70,78 @@ class Solution {
         }else{
             return min;
         }
+    }
+}
+```
+
+
+## [Medium]59. Spiral Matrix II
+**Link** :[ https://leetcode.com/problems/minimum-size-subarray-sum/description/](https://leetcode.com/problems/spiral-matrix-ii/description/)
+
+刷到过好几次的题，没一次解出来，好在这次完成了。解完之后发现还是思路清晰就很容易解出来，理清楚思路远比敲代码简单
+
+**主要思路** ：这道题没有特别好的捷径，每个matrix都是n x n的形式的。第一步是要确定好循环的结束条件，根据案例可以分析出3 x 3的矩阵需要一次外圈循环加一次单独的中心值添加，4 x 4矩阵需要两圈循环。可以得出结束条件为 `loop < n / 2` 如果n为基础则需要在循环结束后添加中心值，中心值为 `int[n/2][n/2]`。下一步需要思考的是每一圈的循环操作需要固定，这也是本题的关键点 
+**循环不变量原则** 顾名思义就是每次循环按照固定的规则进行。每次循环中我们需要进行4次循环操作 : 
+
+- 上行从左到右填充 
+- 右列从上到下填充
+- 下行从右到左填充
+- 左列从下到上填充
+
+4次循环操作中需要进行边界控制，坚持左闭右开或者左开右闭原则，以3 x 3矩阵为例：
+
+- 上行从左到右填充 [0,2)
+- 右列从上到下填充 [0,2)
+- 下行从右到左填充 [0,2)
+- 左列从下到上填充 [0,2)
+
+在完成了4次循环操作后，第二次外部循环内的起始点会发生改变将会从[0][0] -> [1,1],相对应的中止点也会发生变化[2][2] -> [1][1]
+
+
+**难点** ：本题虽然是双指针，但是更多的是考察对代码的掌控能力，把思路弄懂了，这道题的难度会大幅度下降
+
+**题解**：
+
+```
+class Solution {
+    public int[][] generateMatrix(int n) {     
+        int[][] result = new int[n][n];
+        int loop = n / 2;
+        int midPoint = n / 2;
+        int start = 0;
+        int count = 1;
+        int offset = 1;
+        while(loop > 0){
+            int i = start;
+            int j = start;
+            for(;i < n - offset;i++){
+                result[start][i] = count;
+                count++; 
+            }
+
+            for(;j < n - offset;j++){
+                result[j][i] = count;
+                count++;
+            }
+ 
+            for(;i > start;i--){
+                result[j][i] = count;
+                count++;
+            }
+
+            for(;j > start;j--){
+                result[j][i] = count;
+                count++;
+            }
+
+            start++;
+            offset++;
+            loop--;
+        }
+        if(n % 2 == 1){
+            result[midPoint][midPoint] = count;
+        }
+        return result;        
     }
 }
 ```
