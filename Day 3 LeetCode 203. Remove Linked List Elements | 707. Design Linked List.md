@@ -117,4 +117,29 @@ class MyLinkedList {
     }
 }
 ```
+## 【Easy】206. Reverse Linked List
 
+经典链表题同时也带有小坑。
+
+**解题思路** ： 反转列表主要是在每次遍历的时候，先断掉与next之间的指向关系也就是current节点的指针指向prev节点，之后将需要进行下一次遍历也就是将prev节点变为current节点，current节点变为next节点。
+
+**难点** ：本题并不复杂，它的难点在于返回的值不再是head或者dummy.next 而是prev。因为它是一个反转的数组，它的第一个也就是数组的头节点。
+
+```
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        
+        ListNode prev = null;
+        ListNode current = head;
+
+        while(current != null){
+            ListNode next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+        return prev; 
+    }
+}
+```
