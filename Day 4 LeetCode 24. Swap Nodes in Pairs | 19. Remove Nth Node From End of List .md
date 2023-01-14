@@ -69,3 +69,59 @@ class Solution {
     }
 }
 ```
+## 【Easy】 160. Intersection of Two Linked Lists
+https://leetcode.com/problems/intersection-of-two-linked-lists/
+
+**题解** : 
+
+```
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode currentA = headA;
+        ListNode currentB = headB;
+        int lenA = 0;
+        int lenB = 0;
+        while(currentA != null){
+            currentA = currentA.next;
+            lenA++;
+        }
+
+        while(currentB != null){
+            currentB = currentB.next;
+            lenB++;
+        }
+        currentA = headA;
+        currentB = headB;
+
+        
+        if(lenB > lenA){
+            int tempLen = lenA;
+            lenA = lenB;
+            lenB = tempLen;
+
+            ListNode temp = currentA;
+            currentA = currentB;
+            currentB = temp;
+        }
+
+        int gap = lenA - lenB;
+
+        while(gap > 0){
+            currentA = currentA.next;
+            gap--;
+        }
+
+        while(currentA != null){
+            if(currentA == currentB){
+                return currentA;
+            }
+
+            currentA = currentA.next;
+            currentB = currentB.next;
+        }
+        return null;
+        
+    }
+}
+```
+
