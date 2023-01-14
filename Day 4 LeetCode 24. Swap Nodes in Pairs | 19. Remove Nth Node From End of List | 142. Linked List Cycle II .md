@@ -124,7 +124,7 @@ public class Solution {
     }
 }
 ```
-[Medium] 142. Linked List Cycle II
+## [Medium] 142. Linked List Cycle II
 
 **题解** : 
 
