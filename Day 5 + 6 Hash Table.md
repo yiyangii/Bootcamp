@@ -164,4 +164,65 @@ class Solution {
 
 
 ```
+## 【Easy】LeetCode 383. Ransom Note
 
+**link** : https://leetcode.com/problems/ransom-note/description/
+
+**思路** : 题目求的是ransomNote中是否每个字母都可以在magazine中找到，那么就是遍历整个magazine，将每个字母加入hash table，接着遍历整个ransomNote，找到table中对应的字母，如果字母不在hash table中代表false，如果有就看出现的次数，次数小于0则返回false；
+
+**题解** :
+
+```
+
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        int[] map = new int[26];
+
+        
+
+        for(char c : magazine.toCharArray()){
+            map[c - 'a']++;
+        }
+
+        for(char c : ransomNote.toCharArray()){
+            map[c - 'a']--;
+        }
+
+        for(int i : map){
+            if(i < 0){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
+```
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        Map<Character,Integer> map = new HashMap();
+
+        for(char c : magazine.toCharArray()){
+            if(!map.containsKey(c)){
+                map.put(c,1);
+            }else{
+                map.put(c,map.get(c) + 1);
+            }
+        }
+
+        for(char c : ransomNote.toCharArray()){
+            if(!map.containsKey(c)){
+                return false;
+            }
+            if(map.containsKey(c)){
+                map.put(c,map.get(c) - 1);
+                if(map.get(c) < 0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
+```
