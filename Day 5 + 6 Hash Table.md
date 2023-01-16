@@ -135,6 +135,7 @@ class Solution {
 举个例子，1 + 1 = 2 - 0 + 2 = 2， nums3 + nums4 = -2.出现2的情况有两次，那么在hash table中它的次数被记录了下来，和nums3 + 4创造组合能够创造两个组合。 `result = result + 2`
 
 **题解** :
+```
 class Solution {
     public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
         Map<Integer,Integer> map = new HashMap();
@@ -160,7 +161,7 @@ class Solution {
         return result;
     } 
 }
-```
+
 
 ```
 
