@@ -226,3 +226,56 @@ class Solution {
     }
 }
 ```
+
+## 【Medium】LeetCode 15. 3Sum
+
+**link** : https://leetcode.com/problems/3sum/description/
+
+**思路** : 虽然在hash table里，但是其实是双指针。首先先sort一下数组让它从小到大排列。这样遍历的时候如果发现当前数值大于0代表着后面无论如何，结果都会大于0，可以直接返回。在这里，i作为每次循环的起始点，l和r分别是从i开始的第一位数和最后一位数。由于i之前的结果已经遍历过了因此不需要重新考虑。接下来进行一个while循环，当l大于r时终止，由于l不能等于r因为是三个数的和。如果三数之和等于0则将当前的三个数字加入result，接着去重，之后l与r移动到下一个新数字上。同样的去重操作也需要出现在i上，可以在for循环中进行i的去重。
+
+**题解** :
+
+```
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        int length = nums.length;
+        Arrays.sort(nums);
+        for(int i = 0;i < length;i++){
+            int l = i + 1;
+            int r = length - 1;
+            if(i > 0 && nums[i] == nums[i - 1]){
+                continue;
+            }
+            while(l < r){
+                int sum = nums[i] + nums[l] + nums[r];
+                if(nums[i] > 0){
+                    break;
+                }
+                if(sum > 0){
+                    r--;
+                }else if(sum < 0){
+                    l++;
+                }else{
+                    List<Integer> temp = new ArrayList();
+                    temp.add(nums[i]);
+                    temp.add(nums[l]);
+                    temp.add(nums[r]);
+                    result.add(temp);
+                    
+                    while(l < r && nums[l] == nums[l + 1]){
+                        l++;
+                    }
+                    while(l < r && nums[r] == nums[r - 1]){
+                        r--;
+                    }
+                    l++;
+                    r--;
+               }
+            }
+        }
+        return result;
+        
+    }
+}
+```
