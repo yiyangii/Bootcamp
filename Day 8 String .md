@@ -58,3 +58,29 @@ class Solution {
     }
 }
 ```
+【East】剑指 Offer 05. 替换空格
+
+北美leetcode没有，先用截图记录。
+
+![image](https://user-images.githubusercontent.com/70305543/213013709-1ec527c6-6628-412e-aa43-5943a1e5bfe7.png)
+
+简单粗暴，定义一个StringBuilder，遍历字符串，如果当前index是空格则忘StringBuilder里加%20，如果不是则加当前char。
+
+
+```
+class Solution {
+    public String replaceSpace(String s) {
+        
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0;i < s.length();i++){
+            if(s.charAt(i) == ' '){
+                sb.append("%20");
+            }else{
+                sb.append(s.charAt(i));
+            }
+        }
+        return sb.toString();
+    }
+}
+```
+
