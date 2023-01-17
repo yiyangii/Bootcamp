@@ -24,6 +24,8 @@ class Solution {
 ```
 ## 【Easy】LeetCode 541. Reverse String II
 
+**link** : https://leetcode.com/problems/reverse-string-ii/description/
+
 看上去是easy，其实是medium。
 
 这道题最难的是理解题意，首先它将字符串中每k个数进行一次调转。第一种情况，字符串的长度length > 2k，那么把前k个数调转，剩下的k个数放入StringBuilder。第二种情况，字符串元素数量小于2k，
