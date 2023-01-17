@@ -279,3 +279,69 @@ class Solution {
     }
 }
 ```
+
+
+
+## 【Medium】LeetCode 18. 4Sum
+
+**link** : https://leetcode.com/problems/4sum/description/
+
+**思路** : 跟三数之和类似，多加了一层for循环用于循环第二个数，剩下的两个数为l与r。值得注意的是，sum有可能是超过Integer.max的数因此需要为long。
+
+**题解** :
+
+```
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+
+       
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList();
+
+        for(int i = 0;i < nums.length;i++){
+            
+            if(i > 0 && nums[i] == nums[i-1]){
+                continue;
+            }
+            for(int j = i + 1;j < nums.length;j++){
+
+                
+                if(j > i + 1 && nums[j] == nums[j-1]){
+                    continue;
+                }
+
+                int l = j + 1;
+                int r = nums.length - 1;
+
+                while(l < r){
+                    long sum = (long )nums[i] + nums[j] + nums[l] + nums[r];
+                    if(sum == target){
+                        List<Integer> temp = new ArrayList();
+                        temp.add(nums[i]);
+                        temp.add(nums[j]);
+                        temp.add(nums[l]);
+                        temp.add(nums[r]);
+                        result.add(temp);
+
+                        while(l < r && nums[l] == nums[l + 1]){
+                            l++;
+                        }
+
+                        while(l < r && nums[r] == nums[r - 1]){
+                            r--;
+                        }
+                        l++;
+                        r--;
+                    }else if(sum > target){
+                        r--;
+                    }else{
+                        l++;
+                    }
+                }
+            }
+        }
+        return result;
+        
+    }
+}
+```
