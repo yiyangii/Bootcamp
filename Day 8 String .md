@@ -85,7 +85,7 @@ class Solution {
 ```
 
             
- ## 151. Reverse Words in a String
+ ## 【medium】 151. Reverse Words in a String
 
 创建一个char[]存string的char，一个char[]存作为结果的string。进while循环并且从后往前遍历，当i < 0结束。首先先去空格，当前指针是空格的时候i--，一直到出现第一个char结束并记录当前指针位置作为右边界，接着继续一个循环，直到出现第一个空格为止，记录当前位置。最后一个循环从第第二个循环存的指针开始到第一个循环的指针结束，将每个char加入作为结果的char[]。
 
