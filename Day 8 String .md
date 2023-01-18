@@ -58,7 +58,7 @@ class Solution {
     }
 }
 ```
-【East】剑指 Offer 05. 替换空格
+## 【East】剑指 Offer 05. 替换空格
 
 北美leetcode没有，先用截图记录。
 
@@ -84,3 +84,48 @@ class Solution {
 }
 ```
 
+            
+ ## 151. Reverse Words in a String
+
+创建一个char[]存string的char，一个char[]存作为结果的string。进while循环并且从后往前遍历，当i < 0结束。首先先去空格，当前指针是空格的时候i--，一直到出现第一个char结束并记录当前指针位置作为右边界，接着继续一个循环，直到出现第一个空格为止，记录当前位置。最后一个循环从第第二个循环存的指针开始到第一个循环的指针结束，将每个char加入作为结果的char[]。
+
+```
+class Solution {
+    public String reverseWords(String s) {
+        char[] toReserve = s.toCharArray();
+        char[] temp = new char[toReserve.length + 1];
+        int i = toReserve.length - 1;
+        int index = 0;
+        while(i >= 0){
+            while(i >= 0 && toReserve[i] == ' '){
+                i--;
+            }
+
+            int right = i;
+            while(i >= 0 && toReserve[i] != ' '){
+                i--;
+            }
+
+            for(int j = i + 1;j <= right;j++){
+                temp[index] = toReserve[j];
+                index++;
+                if(j == right){
+                    temp[index] = ' ';
+                    index++;
+                }
+            }
+            
+        }
+
+        if(index == 0){
+            return "";
+        }else{
+            return new String(temp,0,index - 1);
+        }
+        
+    }
+
+    
+    
+}
+```
