@@ -102,3 +102,54 @@ class Solution {
     }
 }
 ```
+
+## [Easy] Leetcode 1047. Remove All Adjacent Duplicates In String
+**link** : https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/description/
+
+```
+class Solution {
+    public String removeDuplicates(String s) {
+        Stack<Character> stack = new Stack();
+        String result = "";
+        for(char c : s.toCharArray()){
+            if(stack.isEmpty() || stack.peek() != c){
+                stack.push(c);
+            }else{
+                stack.pop();
+            }
+        }
+
+        while(!stack.isEmpty()){
+            result = stack.pop() + result;
+        }
+        return result;
+    }
+```
+## [Medium] Leetcode 150. Evaluate Reverse Polish Notation
+**link** : https://leetcode.com/problems/evaluate-reverse-polish-notation/description/
+
+```
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack();
+        for(String s : tokens){
+            if("+".equals(s)){
+                stack.push(stack.pop() + stack.pop());
+            }else if("-".equals(s)){
+                stack.push(-stack.pop() + stack.pop());
+            }else if("*".equals(s)){
+                stack.push(stack.pop() * stack.pop());
+            }else if("/".equals(s)){
+                int temp1 = stack.pop();
+                int temp2 = stack.pop();
+                stack.push(temp2 / temp1);
+            }else{
+                stack.push(Integer.valueOf(s));
+            }
+        }
+        return stack.pop();
+    }
+}
+```
+
+
