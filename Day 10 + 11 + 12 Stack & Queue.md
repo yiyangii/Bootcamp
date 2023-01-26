@@ -151,5 +151,59 @@ class Solution {
     }
 }
 ```
+## [Hard] Leetcode 239. Sliding Window Maximum
+**link** : https://leetcode.com/problems/sliding-window-maximum/description/
 
+```
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+
+        if(nums.length == 1){
+            return nums;
+        }
+        myQueue queue = new myQueue();
+        int[] result = new int[nums.length - k + 1];
+        int index = 0;
+        for(int i = 0;i < k;i++){
+             queue.add(nums[i]);
+        }
+        result[index] = queue.peek();
+        index++;
+        for(int i = k;i < nums.length;i++){
+            queue.poll(nums[i - k]);
+            queue.add(nums[i]);
+            
+            result[index] = queue.peek();
+            index++;
+        }
+        return result;
+
+
+    }
+
+    
+}
+class myQueue{
+       Deque<Integer> deque = new LinkedList<>(); 
+
+       void poll(int val){
+           if(!deque.isEmpty() && val == deque.peek()){
+               deque.poll();
+           }
+       }
+
+       void add(int val){
+           while(!deque.isEmpty() &&  val > deque.getLast()){
+               deque.removeLast();
+           }
+           deque.add(val);
+       }
+
+       int peek(){
+           return deque.peek();
+       }
+
+
+}
+```
 
