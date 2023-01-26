@@ -206,4 +206,37 @@ class myQueue{
 
 }
 ```
+## [Medium] Leetcode 347. Top K Frequent Elements
+**link** : https://leetcode.com/problems/top-k-frequent-elements/
+
+```
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        if(k == nums.length){
+            return nums;
+        }
+
+        Map<Integer,Integer> map = new HashMap();
+        for(int i : nums){
+            map.put(i,map.getOrDefault(i,0)+1);
+        }
+
+        Queue<Integer> queue = new PriorityQueue((n1,n2) -> map.get(n1) - map.get(n2));
+        for(int j : map.keySet()){
+            queue.add(j);
+            if(queue.size() > k){
+                queue.poll();
+            }
+
+        }
+        int[] result = new int[k];
+        for(int i = k - 1;i >= 0;i--){
+            result[i] = queue.poll();
+        }
+        return result;
+
+        
+    }
+}
+```
 
