@@ -34,3 +34,26 @@ class Solution {
     }
 }
 ```
+## 【Easy】 145. Binary Tree Postorder Traversal
+**Link** : https://leetcode.com/problems/binary-tree-postorder-traversal/description/
+```
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList();
+        postorder(result,root);
+        return result;
+    }
+
+    public void postorder(List<Integer> result,TreeNode root){
+        if(root == null){
+            return;
+        }
+
+
+        postorder(result,root.left);
+        postorder(result,root.right);
+        result.add(root.val);
+
+    }
+}
+```
