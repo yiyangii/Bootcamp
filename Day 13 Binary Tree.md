@@ -263,3 +263,36 @@ class Solution {
     }
 }
 ```
+
+## [Easy] 101. Symmetric Tree
+**Link** : https://leetcode.com/problems/symmetric-tree/description/
+```
+ */
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        
+        Deque<TreeNode> queue = new LinkedList();
+        queue.offer(root.left);
+        queue.offer(root.right);
+        while(!queue.isEmpty()){
+            TreeNode left = queue.pollFirst();
+            TreeNode right = queue.pollLast();
+
+            if(left == null && right == null){
+                continue;
+            }
+            if(left == null || right == null || right.val != left.val){
+                return false;
+            }
+            queue.offerFirst(left.left);
+            queue.offerFirst(left.right);
+            queue.offerLast(right.right);
+            queue.offerLast(right.left);
+            
+        }
+        return true;
+    }
+    
+    
+}
+```
