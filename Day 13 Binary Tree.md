@@ -361,3 +361,33 @@ class Solution {
     }
 }
 ```
+## [Medium] 222. Count Complete Tree Nodes
+**Link** : https://leetcode.com/problems/count-complete-tree-nodes/description/
+```
+class Solution {
+    public int countNodes(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList();
+        int result = 0;
+        if(root == null){
+            return result;
+        }
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            
+            while(size > 0){
+                TreeNode node = queue.poll();
+                result = result + 1;
+                if(node.left != null){
+                    queue.offer(node.left);
+                }
+                if(node.right != null){
+                    queue.offer(node.right);
+                }
+                size--;
+            }
+        }
+        return result;
+    }
+}
+```
