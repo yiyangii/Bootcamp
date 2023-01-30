@@ -147,4 +147,80 @@ class Solution {
     }
 }
 ```
+## [Medium] 199. Binary Tree Right Side View
+**Link** : https://leetcode.com/problems/binary-tree-right-side-view/description/
+```
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> result = new ArrayList();
 
+        if(root == null){
+            return result;
+        }
+        Queue<TreeNode> queue = new LinkedList();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            
+            
+            
+            int length = queue.size();
+            while(length > 0){
+                TreeNode node = queue.poll();
+                if(node.left != null){
+                    queue.add(node.left);
+                }
+                if(node.right != null){
+                    queue.add(node.right);
+                }
+                
+                if(length == 1){
+                    result.add(node.val);
+                }
+                length--;
+                
+                
+            }
+            
+
+        }
+        return result;
+    }   
+}
+```
+
+## [Easy] 637. Average of Levels in Binary Tree
+**Link** : https://leetcode.com/problems/average-of-levels-in-binary-tree/
+```
+class Solution {
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> result = new ArrayList();
+        if(root == null){
+            return result;
+        }
+        Queue<TreeNode> queue = new LinkedList();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int length = queue.size();
+            double count = length;
+            double sum = 0;
+            while(length > 0){
+                
+                TreeNode node = queue.poll();
+                sum = sum + node.val;
+                if(node.left != null){
+                    queue.add(node.left);
+                }
+                if(node.right != null){
+                    queue.add(node.right);
+                }
+                length--;
+
+                if(length == 0){
+                    result.add(sum / count);
+                }
+            }
+        }
+        return result;
+    }
+}
+```
