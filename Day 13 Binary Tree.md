@@ -328,3 +328,36 @@ class Solution {
     }
 }
 ```
+## [Easy] 111. Minimum Depth of Binary Tree
+**Link** : https://leetcode.com/problems/minimum-depth-of-binary-tree/submissions/887840502/
+```
+class Solution {
+    public int minDepth(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList();
+        int result = 0;
+        if(root == null){
+            return result;
+        }
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            result = result + 1;
+            while(size > 0){
+                TreeNode node = queue.poll();
+                if(node.left == null && node.right == null){
+                    return result;
+                }
+                if(node.left != null){
+                    queue.offer(node.left);
+                }
+                if(node.right != null){
+                    queue.offer(node.right);
+                }
+                size--;
+            }
+            
+        }
+        return result;
+    }
+}
+```
