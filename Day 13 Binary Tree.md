@@ -296,3 +296,35 @@ class Solution {
     
 }
 ```
+## [Easy] 104. Maximum Depth of Binary Tree
+**Link** : https://leetcode.com/problems/maximum-depth-of-binary-tree/description/
+```
+class Solution {
+    public int maxDepth(TreeNode root) {
+
+        Queue<TreeNode> queue = new LinkedList();
+        int result = 0;
+        if(root == null){
+            return result;
+        }
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            result = result + 1;
+            while(size > 0){
+                TreeNode node = queue.poll();
+                
+                if(node.left != null){
+                    queue.offer(node.left);
+                }
+                if(node.right != null){
+                    queue.offer(node.right);
+                }
+                size--;
+            }
+            
+        }
+        return result;
+    }
+}
+```
