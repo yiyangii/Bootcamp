@@ -224,3 +224,42 @@ class Solution {
     }
 }
 ```
+
+## [Easy] 226. Invert Binary Tree
+**Link** : https://leetcode.com/problems/invert-binary-tree/description/
+```
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null){
+            return root;
+        }
+        Queue<TreeNode> queue = new LinkedList();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int length = queue.size();
+            while(length > 0){
+                TreeNode node = queue.poll();
+                
+                swap(node);
+                if(node.right != null){
+                    queue.offer(node.right);
+                }
+                if(node.left != null){
+                    queue.offer(node.left);
+                }
+                
+                length--;
+            }
+ 
+        }
+
+        return root;
+    }
+
+    public void swap(TreeNode root){
+        TreeNode temp = root.right;
+        root.right = root.left;
+        root.left = temp;
+    }
+}
+```
