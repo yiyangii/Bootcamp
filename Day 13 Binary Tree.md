@@ -291,6 +291,83 @@ class Solution {
     }
 }
 ```
+
+
+## [Medium] 116. Populating Next Right Pointers in Each Node
+**Link** : https://leetcode.com/problems/populating-next-right-pointers-in-each-node/description/
+```
+class Solution {
+    public Node connect(Node root) {
+        if(root == null){
+            return root;
+        }
+        Queue<Node> queue = new LinkedList();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            Node current = queue.poll();   
+            if(current.left != null){
+                queue.offer(current.left);
+            } 
+            if(current.right != null){
+                queue.offer(current.right);
+            }
+            for(int i = 1;i < size;i++){
+                Node next = queue.poll();
+                if(next.left != null){
+                    queue.offer(next.left);
+                }
+                if(next.right != null){
+                    queue.offer(next.right);
+                }
+                current.next = next;
+                current = next;
+            }
+            
+        }
+        return root;
+    }
+}
+```
+
+## [Medium] 117. Populating Next Right Pointers in Each Node II
+**Link** : https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/description/
+```
+class Solution {
+    public Node connect(Node root) {
+        if(root == null){
+            return root;
+        }
+        Queue<Node> queue = new LinkedList();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            Node current = queue.poll();   
+            if(current.left != null){
+                queue.offer(current.left);
+            } 
+            if(current.right != null){
+                queue.offer(current.right);
+            }
+            for(int i = 1;i < size;i++){
+                Node next = queue.poll();
+                if(next.left != null){
+                    queue.offer(next.left);
+                }
+                if(next.right != null){
+                    queue.offer(next.right);
+                }
+                current.next = next;
+                current = next;
+            }
+            
+        }
+        return root;
+    }
+}
+```
+
+
 ## [Easy] 226. Invert Binary Tree
 **Link** : https://leetcode.com/problems/invert-binary-tree/description/
 ```
