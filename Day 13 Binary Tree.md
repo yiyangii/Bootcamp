@@ -714,3 +714,42 @@ class Solution {
     }    
 }
 ```
+## [Medium] 112. Path Sum
+**Link** : https://leetcode.com/problems/path-sum/description/
+```
+class Solution {
+    int result = 1;
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        return backtracking(root,targetSum);
+        
+    }
+
+    boolean backtracking(TreeNode root,int targetSum){
+        
+        if(root == null){
+            return false;
+        }
+
+        targetSum = targetSum - root.val;
+
+        if(root.left == null & root.right == null){
+            return targetSum == 0;
+        }
+        if(root.left != null){
+            boolean left = backtracking(root.left,targetSum);
+            if(left) {
+                return true;
+            }
+
+        }
+        if(root.right != null){
+            boolean right = backtracking(root.right,targetSum);
+            if(right) {
+                return true;
+            }
+            
+        }
+        return false;
+    }
+}
+```
