@@ -225,6 +225,72 @@ class Solution {
 }
 ```
 
+## [Medium] 429. N-ary Tree Level Order Traversal
+**Link** : https://leetcode.com/problems/n-ary-tree-level-order-traversal/description/
+```
+class Solution {
+    public List<List<Integer>> levelOrder(Node root) {
+        Queue<Node> queue = new LinkedList();
+        List<List<Integer>> result = new ArrayList();
+        if(root == null){
+            return result;
+        } 
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            List<Integer> temp = new ArrayList();
+            int length = queue.size();
+            
+            
+            while(length > 0){
+                Node node = queue.poll();
+                temp.add(node.val);
+                for(Node child : node.children){
+                    queue.offer(child);
+                }
+                length--;
+            }
+            result.add(temp);
+
+        }
+
+        return result;
+    }
+}
+
+```
+## [Medium] 515. Find Largest Value in Each Tree Row
+https://leetcode.com/problems/find-largest-value-in-each-tree-row/description/
+```
+class Solution {
+    public List<Integer> largestValues(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList();
+        List<Integer> result = new ArrayList();
+        if(root == null){
+            return result;
+        }
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            int max = Integer.MIN_VALUE;
+            while(size > 0){
+                TreeNode node = queue.poll();
+                if(node.val > max){
+                    max = node.val;
+                }
+                if(node.left != null){
+                    queue.offer(node.left);
+                }
+                if(node.right != null){
+                    queue.offer(node.right);
+                }
+                size--;
+            }
+            result.add(max);
+        }
+        return result;
+    }
+}
+```
 ## [Easy] 226. Invert Binary Tree
 **Link** : https://leetcode.com/problems/invert-binary-tree/description/
 ```
@@ -398,6 +464,7 @@ class Solution {
         return result;
     }
 }
+===================================================================================
 ```
 ## [Easy] 404. Sum of Left Leaves
 **Link** : https://leetcode.com/problems/sum-of-left-leaves/description/
@@ -431,7 +498,7 @@ class Solution {
     }
 }
 ```
-===================================================================================
+
 ## [Easy] 110. Balanced Binary Tree
 **Link** : https://leetcode.com/problems/balanced-binary-tree/description/
 ```
