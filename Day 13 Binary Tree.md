@@ -714,7 +714,7 @@ class Solution {
     }    
 }
 ```
-## [Medium] 112. Path Sum
+## [Easy] 112. Path Sum
 **Link** : https://leetcode.com/problems/path-sum/description/
 ```
 class Solution {
@@ -750,6 +750,39 @@ class Solution {
             
         }
         return false;
+    }
+}
+```
+## 113. Path Sum II
+https://leetcode.com/problems/path-sum-ii/description/
+```
+class Solution {
+    List<List<Integer>> result = new ArrayList();
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        if(root == null){
+            return result;
+        }
+        backtracking(root,targetSum,new ArrayList());
+        return result;
+    }
+
+    public void backtracking(TreeNode root, int targetSum,List<Integer> path){
+        path.add(root.val);
+        if(root.left == null && root.right == null){
+            if(targetSum - root.val == 0){
+                result.add(new ArrayList(path));
+            }
+        }
+
+        if(root.left != null){
+            backtracking(root.left,targetSum - root.val,path);
+            path.remove(path.size() - 1);
+        }
+        
+        if(root.right != null){
+            backtracking(root.right,targetSum - root.val,path);
+            path.remove(path.size() - 1);
+        }
     }
 }
 ```
