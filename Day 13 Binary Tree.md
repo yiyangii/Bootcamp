@@ -360,7 +360,15 @@ class Solution {
         return result;
     }
 }
+
+
+
+
 ```
+
+
+
+
 ## [Medium] 222. Count Complete Tree Nodes
 **Link** : https://leetcode.com/problems/count-complete-tree-nodes/description/
 ```
@@ -388,6 +396,142 @@ class Solution {
             }
         }
         return result;
+    }
+}
+```
+## [Easy] 404. Sum of Left Leaves
+**Link** : https://leetcode.com/problems/sum-of-left-leaves/description/
+```
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        int result = 0;
+        Queue<TreeNode> queue = new LinkedList();
+        if(root == null){
+            return 0;
+        }
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int len = queue.size();
+            while(len > 0){
+                TreeNode node = queue.poll();
+                
+
+                if(node.left != null ){
+                    queue.offer(node.left);
+                    if(node.left.left == null && node.left.right == null){
+                        result += node.left.val;
+                    }
+                }if(node.right != null){
+                    queue.offer(node.right);
+                }
+                len--;
+            }
+        }
+        return result;
+    }
+}
+```
+===================================================================================
+## [Easy] 110. Balanced Binary Tree
+**Link** : https://leetcode.com/problems/balanced-binary-tree/description/
+```
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+
+        if(root == null){
+            return true;
+        }
+        Stack<TreeNode> stack = new Stack();
+        TreeNode prev = null;
+        
+        while(root != null || !stack.isEmpty()){
+            while(root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            TreeNode inNode = stack.peek();
+            if(inNode.right == null || inNode.right ==  prev){
+                if(Math.abs(getHeight(inNode.right) - getHeight(inNode.left)) > 1){
+                    return false;
+                    
+                }
+                stack.pop();
+                root = null;
+                prev = inNode;
+            }else{
+                root = inNode.right;
+            }
+        }
+        return true;
+    }
+
+    public int getHeight(TreeNode root){
+        int height = 0;
+        Queue<TreeNode> queue = new LinkedList();
+        if(root == null){
+            return 0;
+        }
+
+        queue.offer(root);
+
+        while(!queue.isEmpty()){
+            int length = queue.size();
+            height = height + 1;
+            while(length > 0){
+                TreeNode node = queue.poll();
+                if(node.left != null){
+                    queue.offer(node.left);
+                }
+                if(node.right != null){
+                    queue.offer(node.right);
+                }
+                length--;
+            }
+            
+        }
+        return height;
+
+        
+    }
+}
+
+```
+
+## [Easy]257. Binary Tree Paths
+**Link** : https://leetcode.com/problems/binary-tree-paths/description/
+```
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> result = new ArrayList();
+        if(root == null){
+            return result;
+        }
+        List<Integer> path = new ArrayList();
+
+        backtracking(root,path,result);
+        return result;
+    }
+
+    void backtracking(TreeNode root,List<Integer> path,List<String> result){
+        path.add(root.val);
+        if(root.left == null && root.right == null){
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0;i < path.size() - 1;i++){
+                sb.append(path.get(i) + "->");
+            }
+            sb.append(path.get(path.size() - 1));
+            result.add(sb.toString());
+            return;
+        }
+
+        if(root.left != null){
+            backtracking(root.left,path,result);
+            path.remove(path.size() - 1);
+        }
+        if(root.right != null){
+            backtracking(root.right,path,result);
+            path.remove(path.size() - 1);
+        }
     }
 }
 ```
