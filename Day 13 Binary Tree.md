@@ -878,3 +878,25 @@ class Solution {
     }
 }
 ```
+## [Easy] 700. Search in a Binary Search Tree
+**Link** : https://leetcode.com/problems/search-in-a-binary-search-tree/description/
+```
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if(root == null){
+            return root;
+            
+        }
+
+        if(root.val == val){
+            return root;
+        }
+        TreeNode result = null;
+
+        if(root.val > val){
+            return searchBST(root.left,val);
+        }
+        return searchBST(root.right,val);
+    }
+}
+```
