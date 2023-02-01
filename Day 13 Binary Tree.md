@@ -814,3 +814,32 @@ class Solution {
     }
 }
 ```
+## [Medium] 105. Construct Binary Tree from Preorder and Inorder Traversal
+**Link** : https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/
+```
+class Solution {
+    int preIndex;
+    Map<Integer,Integer> inorderMap;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        preIndex = 0;
+        inorderMap = new HashMap();
+        for(int i = 0; i < inorder.length;i++){
+            inorderMap.put(inorder[i],i);
+        }
+        return toTree(inorder,0,inorder.length,preorder,0,preorder.length);
+
+    }
+
+    public TreeNode toTree(int[] inorder,int inBegin, int inEnd,int[] preorder,int preBegin,int preEnd){
+        if(inBegin >= inEnd || preBegin >= preEnd){
+            return null;
+        }
+        int rootindex = inorderMap.get(preorder[preBegin]);
+        TreeNode root = new TreeNode(inorder[rootindex]);
+        int nodeCount = rootindex - inBegin;
+        root.left = toTree(inorder,inBegin,rootindex,preorder,preBegin + 1,preBegin + nodeCount + 1);
+        root.right = toTree(inorder,rootindex + 1,inEnd,preorder,preBegin + nodeCount + 1,preEnd);
+        return root;
+    }
+}
+```
