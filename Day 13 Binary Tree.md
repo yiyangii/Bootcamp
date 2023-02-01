@@ -753,7 +753,7 @@ class Solution {
     }
 }
 ```
-## 113. Path Sum II
+## [Medium] 113. Path Sum II
 https://leetcode.com/problems/path-sum-ii/description/
 ```
 class Solution {
@@ -783,6 +783,34 @@ class Solution {
             backtracking(root.right,targetSum - root.val,path);
             path.remove(path.size() - 1);
         }
+    }
+}
+```
+## [Medium] 106. Construct Binary Tree from Inorder and Postorder Traversal
+**Link** : https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/
+```
+class Solution {
+    Map<Integer,Integer> map;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        map = new HashMap();
+        for(int i = 0;i < inorder.length;i++){
+            map.put(inorder[i],i);
+        }
+        return findNum(inorder,0,inorder.length,postorder,0,postorder.length);
+
+
+    }
+    public TreeNode findNum(int[] inorder,int inBegin,int inEnd,
+    int[] postorder,int postBegin,int postEnd){
+        if(inBegin >= inEnd || postBegin >= postEnd){
+            return null;
+        }
+        int rootIndex = map.get(postorder[postEnd - 1]);
+        TreeNode root = new TreeNode(inorder[rootIndex]);
+        int leftNodeLeft = rootIndex - inBegin;
+        root.left = findNum(inorder,inBegin,rootIndex,postorder,postBegin,postBegin + leftNodeLeft);
+        root.right = findNum(inorder,rootIndex + 1,inEnd,postorder,postBegin + leftNodeLeft, postEnd - 1);
+        return root;
     }
 }
 ```
