@@ -843,3 +843,38 @@ class Solution {
     }
 }
 ```
+===============================================================================================================================
+## [Medium] 654. Maximum Binary Tree
+**Link** : https://leetcode.com/problems/maximum-binary-tree/description/
+```
+class Solution {
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        return findNum(nums,0,nums.length);
+    }
+
+    public TreeNode findNum(int[] nums,int left,int right){
+
+        if(right - left < 1){
+            return null;
+        }
+
+        if(right - left == 1){
+            return new TreeNode(nums[left]);
+        }
+        int maxIndex = left;
+        int maxValue = nums[left];
+
+        for(int i = left + 1;i < right;i++){
+            if(nums[i] > maxValue){
+                maxValue = nums[i];
+                maxIndex = i;
+            }
+        }
+
+        TreeNode root = new TreeNode(maxValue);
+        root.left = findNum(nums,left,maxIndex);
+        root.right = findNum(nums,maxIndex + 1,right);
+        return root;
+    }
+}
+```
