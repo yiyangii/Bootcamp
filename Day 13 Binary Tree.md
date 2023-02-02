@@ -976,4 +976,54 @@ class Solution {
     }
 }
 ```
+## [Easy] 501. Find Mode in Binary Search Tree
+**Link** : https://leetcode.com/problems/find-mode-in-binary-search-tree/description/
+```
+class Solution {
+    int counter;
+    List<Integer> result;;
+    TreeNode prev;
+    int maxCount;
+    public int[] findMode(TreeNode root) {
+        prev = null;
+        maxCount = 0;
+        counter = 0;
+        result = new ArrayList();
 
+
+        mode(root);
+        int[] resultInt = new int[result.size()];
+        for(int i = 0;i < result.size();i++){
+            
+            resultInt[i] = result.get(i);
+      
+        }
+        return resultInt;
+    }
+
+    public void mode(TreeNode root){
+        if(root == null){
+            return;
+        }
+
+        mode(root.left);  
+        if(prev == null || root.val != prev.val){
+            counter = 1;
+        }else{
+            counter++;
+        }
+
+        if(counter > maxCount){
+            result.clear();
+            result.add(root.val);
+            maxCount = counter;
+        }else if(counter == maxCount){
+            result.add(root.val);
+        }
+        prev = root;
+              
+        mode(root.right);
+
+    }
+}
+```
