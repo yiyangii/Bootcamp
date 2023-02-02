@@ -948,3 +948,32 @@ class Solution {
     }
 }
 ```
+========================================================================================================
+## [Easy] 530. Minimum Absolute Difference in BST
+**Link** : https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/
+```
+class Solution {
+    TreeNode prev = null;
+    int result = Integer.MAX_VALUE;
+    public int getMinimumDifference(TreeNode root) {
+ 
+        if(root == null){
+            return result;
+        }
+        findMin(root);
+        return result;
+    }
+    public void findMin(TreeNode root){
+        if(root == null){
+            return;
+        }
+        findMin(root.left);
+        if(prev != null){
+            result = Math.min(result,root.val - prev.val);
+        }
+        prev = root;
+        findMin(root.right);
+    }
+}
+```
+
