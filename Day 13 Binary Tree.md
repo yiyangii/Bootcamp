@@ -1071,3 +1071,43 @@ class Solution {
     }
 }
 ```
+## [Medium] 450. Delete Node in a BST
+**Link** : https://leetcode.com/problems/delete-node-in-a-bst/submissions/891674473/
+```
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        root = toDelete(root,key);
+        return root;
+    }
+
+    public TreeNode toDelete(TreeNode root,int key){
+        if(root == null){
+            return null;
+        }
+
+        if(root.val > key){
+            root.left = toDelete(root.left,key);
+        }else if(root.val < key){
+            root.right = toDelete(root.right,key);
+        }else{
+            if(root.left == null && root.right == null){
+                return null;
+            }else if(root.left != null && root.right == null){
+                return root.left;
+            }else if(root.left == null && root.right != null){
+                return root.right;
+            }else{
+                TreeNode current = root.right;
+                while(current.left != null){
+                    current = current.left;
+                }
+
+                root.val = current.val;
+                root.right = toDelete(root.right,current.val);
+            }
+
+        }
+        return root;
+    }
+}
+```
