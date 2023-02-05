@@ -1135,3 +1135,25 @@ class Solution {
     }
 }
 ```
+## [Easy] 108. Convert Sorted Array to Binary Search Tree
+**Link** : https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/description/
+```
+class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+        TreeNode root = builder(nums,0,nums.length - 1);
+        return root;
+    }
+
+    public TreeNode builder(int[] nums,int left,int right){
+        if(left > right){
+            return null;
+        }
+        int middle = left + (right - left) / 2;
+        TreeNode root = new TreeNode(nums[middle]);
+        root.left = builder(nums,left,middle - 1);
+        root.right = builder(nums,middle + 1,right);
+        return root;
+    }
+
+}
+```
