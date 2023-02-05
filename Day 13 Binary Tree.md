@@ -1111,3 +1111,27 @@ class Solution {
     }
 }
 ```
+=====================================================================
+## [Medium] 669. Trim a Binary Search Tree
+**Link** : https://leetcode.com/problems/trim-a-binary-search-tree/submissions/892274983/
+```
+class Solution {
+    public TreeNode trimBST(TreeNode root, int low, int high) {
+        if(root == null){
+            return root;
+        }
+        if(root.val < low){
+            root.right = trimBST(root.right,low,high);
+            return root.right;
+        }
+
+        if(root.val > high){
+            root.left = trimBST(root.left,low,high);
+            return root.left;
+        }
+        root.left = trimBST(root.left,low,high);
+        root.right = trimBST(root.right,low,high);
+        return root;
+    }
+}
+```
