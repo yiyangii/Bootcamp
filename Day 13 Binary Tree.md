@@ -1157,3 +1157,24 @@ class Solution {
 
 }
 ```
+## [Medium] 538. Convert BST to Greater Tree
+**Link** : https://leetcode.com/problems/convert-bst-to-greater-tree/description/
+```
+class Solution {
+    int sum;
+    public TreeNode convertBST(TreeNode root) {
+        builder(root,new TreeNode()); 
+        return root;  
+    }
+
+    public void builder(TreeNode root,TreeNode prev){
+        if(root == null){
+            return;
+        }
+        builder(root.right,prev);
+        sum += root.val;
+        root.val  = sum;
+        builder(root.left,prev);  
+    }
+}
+```
