@@ -740,6 +740,24 @@ class Solution {
     }    
 }
 ```
+```
+class Solution {
+    int sum = 0;
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        int mid = 0;
+        int left = sumOfLeftLeaves(root.left);
+        int right = sumOfLeftLeaves(root.right);
+        if(root.left != null && root.left.left == null && root.left.right == null){
+            mid =  root.left.val;
+        }
+        sum = left + right + mid;
+        return sum;
+    }
+}
+```
 ## [Easy] 112. Path Sum
 **Link** : https://leetcode.com/problems/path-sum/description/
 ```
