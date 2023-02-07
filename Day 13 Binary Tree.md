@@ -508,7 +508,33 @@ class Solution {
 
 
 ```
-
+## [Easy] 110. Balanced Binary Tree
+**Link** : https://leetcode.com/problems/balanced-binary-tree/description/
+```
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        return getHeight(root) != -1;
+    }
+    public int getHeight(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int left = getHeight(root.left);
+        if(left == -1){
+            return -1;
+        }
+        int right = getHeight(root.right);
+        if(right == -1){
+            return -1;
+        }
+        int result = Math.abs(right - left);
+        if(result > 1){
+            return -1;
+        }
+        return Math.max(right,left) + 1;
+    }
+}
+```
 
 
 
