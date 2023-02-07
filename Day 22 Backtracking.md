@@ -48,3 +48,49 @@ class Solution {
     } 
 } 
 ```
+### [Medium] 17. Letter Combinations of a Phone Number
+**Link** : https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+```
+class Solution {
+    static Map<Character, String> map = new HashMap() {
+        {
+            put('0', "");
+            put('1', "");
+            put('2', "abc");
+            put('3', "def");
+            put('4', "ghi");
+            put('5', "jkl");
+            put('6', "mno");
+            put('7', "pqrs");
+            put('8', "tuv");
+            put('9', "wxyz");
+        }
+    };
+
+    List<String> result = new ArrayList();
+
+    public List<String> letterCombinations(String digits) {
+        if(digits.length() == 0){
+            return result;
+        }
+        backtracking(digits,new StringBuilder(),0);
+        return result;    
+    }
+
+    void backtracking(String digits,StringBuilder sb,int index){
+        if(index == digits.length()){
+            result.add(sb.toString());
+            return;
+        }
+        
+
+        
+        String temp = map.get(digits.charAt(index));
+        for(char c : temp.toCharArray()){
+            sb.append(c);
+            backtracking(digits,sb,index + 1);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
+}
+```
