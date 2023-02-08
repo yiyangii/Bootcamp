@@ -94,3 +94,38 @@ class Solution {
     }
 }
 ```
+## [Medium]39. Combination Sum
+**Link** : https://leetcode.com/problems/combination-sum/description/
+```
+class Solution {
+    List<List<Integer>> result = new ArrayList();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        if(candidates.length == 0){
+            return result;
+        }
+        Arrays.sort(candidates);
+        backtracking(candidates,target,0,new ArrayList(),0);
+        return result;
+    }
+
+    void backtracking(int[] candidates,int target,int sum,List<Integer> current,int index){
+        if(sum == target){
+            result.add(new ArrayList(current));
+        }else if(sum > target){
+            return;
+        }
+
+        for(int i = index;i < candidates.length;i++){
+            if(sum + candidates[i] > target){
+                break;
+            }
+            sum = sum + candidates[i];
+            
+            current.add(candidates[i]);
+            backtracking(candidates,target,sum,current,i);
+            sum = sum - candidates[i];
+            current.remove(current.size() - 1);
+        }
+    }
+}
+```
