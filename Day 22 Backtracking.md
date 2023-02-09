@@ -129,3 +129,43 @@ class Solution {
     }
 }
 ```
+## [Medium] 40. Combination Sum II
+**Link** : https://leetcode.com/problems/combination-sum-ii/description/
+```
+class Solution {
+    List<List<Integer>> result = new ArrayList();
+    
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        boolean[] used = new boolean[candidates.length];
+        Arrays.fill(used,false);
+        backtracking(0,new ArrayList(),candidates,target,0,used);
+        return result;
+    }
+
+    void backtracking(int sum,List<Integer> current,int[] candidates,int target,int index,boolean[] used){
+        if(sum == target){
+            result.add(new ArrayList(current));
+            return;
+        }
+
+        for(int i = index;i < candidates.length;i++){
+            if(sum + candidates[i] > target){
+                break;
+            }
+            if(i > 0 && candidates[i - 1] == candidates[i] && !used[i - 1]){
+                continue;
+            }
+
+            current.add(candidates[i]);
+            sum += candidates[i];
+            used[i] = true;
+            backtracking(sum,current,candidates,target,i + 1,used);
+            sum -= candidates[i];
+            current.remove(current.size() - 1);
+            used[i] = false;
+        }
+        
+    }
+}
+```
