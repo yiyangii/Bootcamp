@@ -169,3 +169,43 @@ class Solution {
     }
 }
 ```
+## [Medium] 131. Palindrome Partitioning
+**Link** : https://leetcode.com/problems/palindrome-partitioning/description/
+```
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> result = new ArrayList();
+
+        dfs(0,result,new ArrayList<String>(),s);
+        return result;
+
+    }
+
+    public void dfs(int start,List<List<String>> result,List<String> current,String s){
+        
+        if(start >= s.length()){
+            result.add(new ArrayList(current));
+        }
+        for(int end = start;end < s.length();end++){
+            if(checkP(start,end,s)){
+                current.add(s.substring(start,end+1));   
+                dfs(end+1,result,current,s);
+                current.remove(current.size()-1);
+            }
+        }
+
+
+    }
+
+    public boolean checkP(int start,int end,String temp){
+        while(start < end){
+            if(temp.charAt(start) != temp.charAt(end)){
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+}
+```
