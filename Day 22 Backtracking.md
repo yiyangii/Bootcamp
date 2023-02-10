@@ -259,3 +259,30 @@ class Solution {
     }   
 }
 ```
+## [Medium] 78. Subsets
+**Link** : https://leetcode.com/problems/subsets/description/
+```
+class Solution {
+    List<List<Integer>> result = new ArrayList();
+ 
+    public List<List<Integer>> subsets(int[] nums) {
+        
+        dfs(0,new ArrayList(),nums,result);
+        return result;
+        
+    }
+
+    public void dfs(int start,List<Integer> current,int[] nums,List<List<Integer>> result){
+        result.add(new ArrayList(current));
+        if(start >= nums.length){
+            return;
+        }
+
+        for(int i = start;i < nums.length;i++){
+            current.add(nums[i]);
+            dfs(i + 1,current,nums,result);
+            current.remove(current.size() - 1);
+        }
+    }
+}
+```
