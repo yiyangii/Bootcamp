@@ -209,3 +209,53 @@ class Solution {
     }
 }
 ```
+## [Medium] 93. Restore IP Addresses
+**Link** : https://leetcode.com/problems/restore-ip-addresses/description/
+```
+class Solution {
+    List<String> result = new ArrayList();
+    public List<String> restoreIpAddresses(String s) {
+        
+        dfs(s,new StringBuilder(),3,0);
+        return result;
+    }
+    void dfs(String s,StringBuilder sb,int dot,int index){
+        if(dot == 0){
+            if(valid(s.substring(index))){
+                sb.append('.' + s.substring(index));
+                result.add(sb.toString());
+            }
+            return;
+        }
+        for(int i = index;i < s.length();i++){
+            if(valid(s.substring(index,i + 1))){
+                int length = sb.length();
+                if(dot == 3){
+                    sb.append(s.substring(index,i + 1));
+                    dfs(s,sb,dot-1,i + 1);
+                    sb.setLength(length);
+                }else{
+                    sb.append('.' + s.substring(index,i + 1));
+                    dfs(s,sb,dot - 1,i + 1);
+                    sb.setLength(length);
+                }
+            }
+        }
+    }
+    boolean valid(String s){     
+        if(s.length() > 3 ){
+            return false;
+        }
+        if(s.length() < 1){
+            return false;
+        }
+        if(s.charAt(0) == '0' && s.length() > 1){
+            return false;
+        }
+        if(Integer.valueOf(s) > 255){
+            return false;
+        }
+        return true;
+    }   
+}
+```
