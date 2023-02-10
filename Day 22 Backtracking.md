@@ -312,3 +312,34 @@ class Solution {
     
 }
 ```
+## [Medium] 491. Non-decreasing Subsequences
+**Link** : https://leetcode.com/problems/non-decreasing-subsequences/
+```
+class Solution {
+    List<List<Integer>> result = new ArrayList();
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        dfs(nums,0,new ArrayList());
+        return result;
+    }
+    void dfs(int[] nums,int index,List<Integer> current){
+        if(current.size() > 1){
+            result.add(new ArrayList(current));
+       
+        }
+        int[] used = new int[201];
+
+        for(int i = index;i < nums.length;i++){
+            if(!current.isEmpty() && current.get(current.size() - 1) > nums[i] 
+            || used[nums[i]+100] == 1){
+                continue;
+            }
+            
+            current.add(nums[i]);
+            used[nums[i] + 100] = 1;
+            dfs(nums,i + 1,current);
+            current.remove(current.size()-1);
+        }
+
+    }
+}
+```
