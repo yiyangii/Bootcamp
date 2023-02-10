@@ -343,3 +343,35 @@ class Solution {
     }
 }
 ```
+
+## [Medium] 46. Permutations
+**Link** : https://leetcode.com/problems/permutations/
+```
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<Integer> temp = new ArrayList<Integer>();
+        dfs(result,nums.length,nums,temp);
+        
+        return result;
+        
+    }
+    public void dfs(List<List<Integer>> result,int length,int[] nums,List<Integer> temp){
+       
+        
+        if(temp.size() == length){
+            result.add(new ArrayList<Integer>(temp));   
+        }else{
+            for(int i = 0;i < length;i++){
+                if(temp.contains(nums[i])){
+                    continue;
+                }
+                temp.add(nums[i]);
+                dfs(result,length,nums,temp);
+                temp.remove(temp.size() - 1);
+            }
+        }
+        
+    }
+}
+```
