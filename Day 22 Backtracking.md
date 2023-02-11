@@ -375,3 +375,41 @@ class Solution {
     }
 }
 ```
+##[Medium] 47. Permutations II
+**Link** : https://leetcode.com/problems/permutations-ii/submissions/895701746/
+```
+class Solution {
+    List<List<Integer>> result = new ArrayList();
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        Arrays.sort(nums);
+        if(nums.length == 0 || nums == null){
+            return result;
+        }
+        boolean[] used = new boolean[nums.length];
+        backtracking(nums,new ArrayList(),0,used);
+        return result;
+    }
+
+    void backtracking(int[] nums,List<Integer> current,int index,boolean[] used){
+        if(current.size() == nums.length){
+            result.add(new ArrayList(current));
+            return;
+        }
+        
+        for(int i = 0;i < nums.length;i++){
+            if(used[i] == true){
+                continue;
+            }
+            if(i > 0 && nums[i] == nums[i - 1] && used[i - 1] == true){
+                continue;
+            }
+            current.add(nums[i]);
+            used[i] = true;
+            backtracking(nums,current,i,used);
+            current.remove(current.size() - 1);
+            used[i] = false;
+
+        }
+    }
+}
+```
