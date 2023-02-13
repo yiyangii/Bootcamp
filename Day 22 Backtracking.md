@@ -413,3 +413,128 @@ class Solution {
     }
 }
 ```
+## [Hard]332. Reconstruct Itinerary
+**Link** : https://leetcode.com/problems/reconstruct-itinerary/description/
+```
+class Solution {
+    LinkedList<String> current = new LinkedList();
+    LinkedList<String> result;
+    public List<String> findItinerary(List<List<String>> tickets) {
+        Collections.sort(tickets, (a, b) -> a.get(1).compareTo(b.get(1)));
+        boolean[] used = new boolean[tickets.size()];
+        current.add("JFK");
+        backtracking((ArrayList)tickets,used);
+        return result;
+
+    }
+
+    public boolean backtracking(ArrayList<List<String>> tickets,boolean[] used){
+        if(current.size() == tickets.size() + 1){
+            result = new LinkedList(current);
+            return true;
+        }
+
+        for(int i = 0;i < tickets.size();i++){
+            if(!used[i] && tickets.get(i).get(0).equals(current.getLast())){
+                current.add(tickets.get(i).get(1));
+                used[i] = true;
+                if(backtracking(tickets,used)){
+                    return true;
+                }
+                used[i] = false;
+                current.removeLast();
+            }
+        }
+        return false;
+    }
+}
+```
+## [Hard] 51. N-Queens
+**Link** : https://leetcode.com/problems/n-queens/
+```
+class Solution {
+    List<List<String>> result = new ArrayList();
+    public List<List<String>> solveNQueens(int n) {
+        char[][] board = new char[n][n];
+        for(char[] c : board){
+            Arrays.fill(c,'.');
+        }
+        dfs(board,0,n);
+        return result;
+        
+    }
+
+    void dfs(char[][] board,int index,int n){
+        if(index == n){
+            result.add(toList(board));
+            return;
+        }
+
+        for(int i = 0;i < n;i++){
+            if(isVlid(index,i,board,n)){
+                board[index][i] = 'Q';
+                dfs(board,index + 1,n);
+                board[index][i] = '.';
+            }
+        }
+    }
+
+    boolean isVlid(int x,int y,char[][] board,int n){
+        for(int i = 0;i < n;i++){
+            if(board[x][i] == 'Q'){
+                return false;
+            }
+        }
+
+        for(int j = 0;j < n;j++){
+            if(board[j][y] == 'Q'){
+                return false;
+            }
+        }
+
+        for(int i = 0;i < n;i++){
+            if(x + i < board.length && y + i < board.length){
+                if(board[x+i][y+i] == 'Q'){
+                    return false;
+                }
+            }
+        }
+
+        for(int i = 0;i < n;i++){
+            if(x + i < board.length && y - i >= 0){
+                if(board[x+i][y-i] == 'Q'){
+                    return false;
+                }
+            }
+        }
+
+        for(int i = 0;i < n;i++){
+            if(x - i >= 0 && y + i < board.length){
+                if(board[x-i][y+i] == 'Q'){
+                    return false;
+                }
+            }
+        }
+
+        for(int i = 0;i < n;i++){
+            if(x - i >= 0 && y - i >= 0){
+                if(board[x-i][y-i] == 'Q'){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+
+
+    }
+
+    public List toList(char[][] board){
+        List<String> ls = new ArrayList();
+        for(char[] c : board){
+            ls.add(String.copyValueOf(c));
+        }
+        return ls;
+    }
+}
+```
