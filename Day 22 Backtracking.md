@@ -538,3 +538,65 @@ class Solution {
     }
 }
 ```
+
+
+## [Hard] 37. Sudoku Solver
+**Link** : https://leetcode.com/problems/sudoku-solver/description/
+```
+class Solution {
+    public void solveSudoku(char[][] board) {
+        dfs(board);   
+    }
+
+    boolean dfs(char[][] board){
+        for(int i = 0;i < 9;i++){
+            for(int j = 0;j < 9;j++){
+                if(board[i][j] != '.'){
+                    continue;
+                }
+                for(char k = '1';k <= '9';k++){
+                    if(isValid(i,j,board,k)){
+                        board[i][j] = k;
+                        if(dfs(board)){
+                            return true;
+                        }
+                        board[i][j] = '.';
+                    }
+                }
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    public boolean isValid(int x,int y,char[][] board,char val){
+        for(int i = 0;i < 9;i++){
+            if(board[x][i] == val){
+                return false;
+            }
+        }
+
+        for(int i = 0;i < 9;i++){
+            if(board[i][y] == val){
+                return false;
+            }
+        }
+
+        int row_start = (x / 3) * 3;
+        int col_start = (y / 3) * 3;
+        for(int i = row_start;i < row_start + 3;i++){
+            for(int j = col_start;j < col_start + 3;j++){
+                if(board[i][j] == val){
+                    return false;
+                }
+            }
+        }
+
+
+        
+
+        return true;
+    }
+}
+```
