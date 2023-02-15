@@ -97,3 +97,23 @@ class Solution {
     }
 }
 ```
+## [Medium] 45. Jump Game II
+**Link** : https://leetcode.com/problems/jump-game-ii/description/
+```
+class Solution {
+    public int jump(int[] nums) {
+        int result = 0;
+        int currentRange = 0;
+        int maxRange = 0;
+        for(int i = 0;i <= currentRange && currentRange < nums.length - 1;i++){
+            maxRange = Math.max(maxRange,i + nums[i]);
+            if(i == currentRange){
+                currentRange = maxRange;
+                result++;
+            }
+        }
+        return result;
+        
+    }
+}
+```
