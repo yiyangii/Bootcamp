@@ -117,3 +117,36 @@ class Solution {
     }
 }
 ```
+## [Easy] 1005. Maximize Sum Of Array After K Negations
+**Link** : https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/description/
+```
+class Solution {
+    public int largestSumAfterKNegations(int[] nums, int k) {
+        if(nums.length == 1){
+            return k % 2 == 0 ? nums[0] : -nums[0];
+        }
+        Arrays.sort(nums);
+        int result = 0;
+        int index = 0;
+
+        for(int i = 0;i < k;i++){
+            if(i < nums.length - 1 && nums[i] < 0){
+                nums[index] = -nums[index];
+                if(nums[index] >= Math.abs(nums[index+ 1])){
+                    
+                    index++;
+                    
+                }
+                continue;
+            }
+            nums[index] = -nums[index];
+        }
+
+        for(int i : nums){
+            result += i;
+        }
+
+        return result;
+    }
+}
+```
