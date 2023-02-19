@@ -277,3 +277,28 @@ class Solution {
     }
 }
 ```
+## [Medium] 763. Partition Labels
+**Link** : https://leetcode.com/problems/partition-labels/description/
+```
+class Solution {
+    public List<Integer> partitionLabels(String s) {
+        int[] edge = new int[26];
+        char[] c = s.toCharArray();
+        for(int i = 0;i < c.length;i++){
+            edge[c[i] - 'a'] = i;
+        }
+        List<Integer> result = new ArrayList();
+
+        int index = 0;
+        int prev = -1;
+        for(int i = 0;i < s.length();i++){
+            index = Math.max(index,edge[c[i] - 'a']);
+            if(index == i){
+                result.add(i - prev);
+                prev = i;
+            }
+        }
+        return result;
+    }
+}
+```
