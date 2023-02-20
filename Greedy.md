@@ -320,3 +320,43 @@ class Solution {
     }
 }
 ```
+## [Medium] 738. Monotone Increasing Digits
+**Link** : https://leetcode.com/problems/monotone-increasing-digits/description/
+```
+class Solution {
+    public int monotoneIncreasingDigits(int n) {
+        String[] s = (n + "").split("");
+        int index = s.length;
+        for(int i = s.length - 1;i > 0;i--){
+            if(Integer.parseInt(s[i]) < Integer.parseInt(s[i - 1])){
+                s[i-1] = (Integer.parseInt(s[i-1]) - 1 + "");
+                index = i;
+            }
+        }
+
+        for(int i = index;i < s.length;i++){
+            s[i] = "9";
+        }
+        return Integer.parseInt(String.join("",s));
+    }
+}
+```
+## [Medium] 714. Best Time to Buy and Sell Stock with Transaction Fee
+**Link** : https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/
+```
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        int buy = prices[0] + fee;
+        int result = 0;
+        for(int price : prices){
+            if(price + fee < buy){
+                buy = price + fee;
+            }else if(price > buy){
+                result += price - buy;
+                buy = price;
+            }
+        }
+        return result;
+    }
+}
+```
