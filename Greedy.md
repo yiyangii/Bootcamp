@@ -360,3 +360,34 @@ class Solution {
     }
 }
 ```
+## [Hard] 968. Binary Tree Cameras
+**Link** : https://leetcode.com/problems/binary-tree-cameras/description/
+```
+class Solution {
+    int result = 0;
+    public int minCameraCover(TreeNode root) {
+        if(count(root) == 0){
+            result++;
+        }
+        return result;
+    }
+
+    public int count(TreeNode root){
+        if(root == null){
+            return 2;
+        }
+
+        int left = count(root.left);
+        int right = count(root.right);
+
+        if(left == 2 && right == 2){
+            return 0;
+        }else if(left == 0 || right == 0){
+            result++;
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+}
+```
