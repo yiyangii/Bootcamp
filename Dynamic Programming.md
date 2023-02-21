@@ -34,7 +34,7 @@ class Solution {
 }
 ```
 
-##[Easy] 746. Min Cost Climbing Stairs
+## [Easy] 746. Min Cost Climbing Stairs
 **Link** : https://leetcode.com/problems/min-cost-climbing-stairs/
 ```
 class Solution {
