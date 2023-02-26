@@ -283,3 +283,38 @@ class Solution {
     }
 }
 ```
+## [Medium] 518. Coin Change II
+**Link** : https://leetcode.com/problems/coin-change-ii/description/
+```
+class Solution {
+    public int change(int amount, int[] coins) {
+        int[] dp = new int[amount + 1];
+        dp[0] = 1;
+        for(int i = 0;i < coins.length;i++){
+            for(int j = coins[i]; j <= amount;j++){
+                dp[j] += dp[j - coins[i]];
+            }
+        }
+        return dp[amount];
+        
+    }
+}
+```
+## [Medium] 377. Combination Sum IV
+**Link** : https://leetcode.com/problems/combination-sum-iv/description/
+```
+class Solution {
+    public int combinationSum4(int[] nums, int target) {
+        int[] dp = new int[target + 1];
+        dp[0] = 1;
+        for (int i = 0; i <= target; i++) {
+            for (int j = 0; j < nums.length; j++) {
+                if (i >= nums[j]) {
+                    dp[i] += dp[i - nums[j]];
+                }
+            }
+        }
+        return dp[target];
+    }
+}
+```
