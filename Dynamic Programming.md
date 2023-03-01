@@ -463,3 +463,28 @@ class Solution {
     }
 }
 ```
+## [Medium] 337. House Robber III
+**Link** : https://leetcode.com/problems/house-robber-iii/description/
+```
+class Solution {
+    public int rob(TreeNode root) {
+        int[] ans = recursion(root);
+        return Math.max(ans[0],ans[1]);
+    }
+
+    public int[] recursion(TreeNode root){
+        int[] result = new int[2];
+        if(root == null){
+            return result;
+        }
+
+        int[] left = recursion(root.left);
+        int[] right = recursion(root.right);
+
+        result[0] = Math.max(left[0],left[1]) + Math.max(right[0],right[1]);
+        result[1] = root.val + right[0] + left[0];
+
+        return result;
+    }
+}
+```
