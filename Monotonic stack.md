@@ -52,3 +52,26 @@ class Solution {
     }
 }
 ```
+## 503. Next Greater Element II
+```
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int[] result = new int[nums.length];
+        Deque<Integer> deque = new LinkedList();
+        Arrays.fill(result,-1);
+        deque.push(0);
+        for(int i = 1;i < nums.length * 2;i++){
+            if(nums[i % nums.length] <= nums[deque.peek()]){
+                deque.push(i % nums.length);
+            }else{
+                while(!deque.isEmpty() && nums[i % nums.length] > nums[deque.peek()]){
+                    result[deque.peek()] = nums[i % nums.length];
+                    deque.pop();
+                }
+                deque.push(i % nums.length);
+            }
+        }
+        return result;
+    }
+}
+```
