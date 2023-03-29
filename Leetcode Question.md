@@ -39,3 +39,23 @@ class Solution {
     }
 }
 ```
+## [Easy] 283. Move Zeroes
+```
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int fast = 0;
+        int slow = 0;
+        for(;fast < nums.length;fast++){
+            if(nums[fast] != 0){
+                nums[slow] = nums[fast];
+                slow++;
+            }
+        }
+        for(;slow < fast;slow++){
+            nums[slow] = 0;
+        }
+        
+        
+    }
+}
+```
