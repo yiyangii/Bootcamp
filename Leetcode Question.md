@@ -122,3 +122,41 @@ class Solution {
     }
 }
 ```
+## 143. Reorder List
+
+```
+class Solution {
+    public void reorderList(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }   
+        ListNode right = slow.next;
+        slow.next = null;
+        right = reverse(right);
+        ListNode left = head;
+        while(right != null){
+            ListNode next = left.next;
+            ListNode rightNext = right.next;
+            left.next = right;
+            right.next = next;
+
+            left = next;
+            right = rightNext;
+        }
+       
+    }
+    public ListNode reverse(ListNode head){
+        ListNode prev = null;
+        while(head != null){
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
+    }
+}
+```
