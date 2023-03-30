@@ -79,3 +79,46 @@ class Solution {
     }
 }
 ```
+## 234. Palindrome Linked List
+```
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null && head.next == null) return true;
+
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode prev = head;
+        while(fast != null && fast.next != null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+            
+        }
+        prev.next = null;
+        ListNode current1 = head;
+        ListNode current2 = reverse(slow);
+        while(current1 != null){
+            if(current1.val != current2.val){
+                return false;
+            }
+            current1 = current1.next;
+            current2 = current2.next;
+        }
+        return true;
+
+
+    }
+
+    public ListNode reverse(ListNode head){
+        
+        ListNode prev = null;
+        while(head != null){
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
+    }
+}
+```
